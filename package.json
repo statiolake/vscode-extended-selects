@@ -18,9 +18,7 @@
     "categories": [
         "Other"
     ],
-    "activationEvents": [
-        "onCommand:extended-selects.select"
-    ],
+    "activationEvents": [],
     "main": "./out/extension",
     "contributes": {
         "commands": [
