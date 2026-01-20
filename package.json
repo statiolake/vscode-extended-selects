@@ -1,0 +1,160 @@
+{
+    "name": "extended-selects",
+    "displayName": "Extended Selects",
+    "description": "Vim-style text objects for VS Code. Select inner/around word, paragraph, brackets, quotes, tags and more.",
+    "version": "0.1.0",
+    "license": "MIT",
+    "publisher": "statiolake",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/statiolake/vscode-extended-selects.git"
+    },
+    "engines": {
+        "vscode": "^1.75.0"
+    },
+    "extensionKind": [
+        "ui"
+    ],
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extended-selects.select"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extended-selects.select",
+                "title": "Extended Selects: Select Text Object"
+            },
+            {
+                "command": "extended-selects.select.inner-word",
+                "title": "Extended Selects: Select Inner Word"
+            },
+            {
+                "command": "extended-selects.select.around-word",
+                "title": "Extended Selects: Select Around Word"
+            },
+            {
+                "command": "extended-selects.select.inner-WORD",
+                "title": "Extended Selects: Select Inner WORD"
+            },
+            {
+                "command": "extended-selects.select.around-WORD",
+                "title": "Extended Selects: Select Around WORD"
+            },
+            {
+                "command": "extended-selects.select.inner-paren",
+                "title": "Extended Selects: Select Inner Paren ()"
+            },
+            {
+                "command": "extended-selects.select.around-paren",
+                "title": "Extended Selects: Select Around Paren ()"
+            },
+            {
+                "command": "extended-selects.select.inner-brace",
+                "title": "Extended Selects: Select Inner Brace {}"
+            },
+            {
+                "command": "extended-selects.select.around-brace",
+                "title": "Extended Selects: Select Around Brace {}"
+            },
+            {
+                "command": "extended-selects.select.inner-bracket",
+                "title": "Extended Selects: Select Inner Bracket []"
+            },
+            {
+                "command": "extended-selects.select.around-bracket",
+                "title": "Extended Selects: Select Around Bracket []"
+            },
+            {
+                "command": "extended-selects.select.inner-angle",
+                "title": "Extended Selects: Select Inner Angle <>"
+            },
+            {
+                "command": "extended-selects.select.around-angle",
+                "title": "Extended Selects: Select Around Angle <>"
+            },
+            {
+                "command": "extended-selects.select.inner-double-quote",
+                "title": "Extended Selects: Select Inner Double Quote"
+            },
+            {
+                "command": "extended-selects.select.around-double-quote",
+                "title": "Extended Selects: Select Around Double Quote"
+            },
+            {
+                "command": "extended-selects.select.inner-single-quote",
+                "title": "Extended Selects: Select Inner Single Quote"
+            },
+            {
+                "command": "extended-selects.select.around-single-quote",
+                "title": "Extended Selects: Select Around Single Quote"
+            },
+            {
+                "command": "extended-selects.select.inner-backtick",
+                "title": "Extended Selects: Select Inner Backtick"
+            },
+            {
+                "command": "extended-selects.select.around-backtick",
+                "title": "Extended Selects: Select Around Backtick"
+            },
+            {
+                "command": "extended-selects.select.inner-tag",
+                "title": "Extended Selects: Select Inner Tag"
+            },
+            {
+                "command": "extended-selects.select.around-tag",
+                "title": "Extended Selects: Select Around Tag"
+            },
+            {
+                "command": "extended-selects.select.inner-paragraph",
+                "title": "Extended Selects: Select Inner Paragraph"
+            },
+            {
+                "command": "extended-selects.select.around-paragraph",
+                "title": "Extended Selects: Select Around Paragraph"
+            },
+            {
+                "command": "extended-selects.select.inner-argument",
+                "title": "Extended Selects: Select Inner Argument"
+            },
+            {
+                "command": "extended-selects.select.around-argument",
+                "title": "Extended Selects: Select Around Argument"
+            },
+            {
+                "command": "extended-selects.select.inner-entire",
+                "title": "Extended Selects: Select Inner Entire Document"
+            },
+            {
+                "command": "extended-selects.select.around-entire",
+                "title": "Extended Selects: Select Around Entire Document"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "lint": "eslint src --ext ts && biome check .",
+        "format": "eslint src --ext ts --fix && biome check --write",
+        "pretest": "npm run compile && npm run lint",
+        "test": "vscode-test"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^2.2.6",
+        "@types/mocha": "^10.0.10",
+        "@types/node": "24.7.2",
+        "@types/vscode": "^1.75.0",
+        "@vscode/test-cli": "^0.0.11",
+        "@vscode/test-electron": "^2.5.2",
+        "@vscode/vsce": "^3.6.2",
+        "eslint": "9.37.0",
+        "glob": "^11.0.3",
+        "mocha": "^11.7.4",
+        "typescript": "5.9.3",
+        "typescript-eslint": "^8.46.0"
+    }
+}
