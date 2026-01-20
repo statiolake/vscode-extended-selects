@@ -2,7 +2,7 @@
     "name": "extended-selects",
     "displayName": "Extended Selects",
     "description": "Vim-style text objects for VS Code. Select inner/around word, paragraph, brackets, quotes, tags and more.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "license": "MIT",
     "publisher": "statiolake",
     "repository": {
