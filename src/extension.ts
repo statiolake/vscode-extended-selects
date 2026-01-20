@@ -37,12 +37,40 @@ async function executeSelection(editor: vscode.TextEditor, textObjectId: TextObj
  * QuickPick を表示してテキストオブジェクトを選択
  */
 async function showQuickPick(editor: vscode.TextEditor): Promise<void> {
-    const items = createQuickPickItems();
+    const allItems = createQuickPickItems();
 
-    const quickPick = vscode.window.createQuickPick<(typeof items)[0]>();
-    quickPick.items = items;
-    quickPick.placeholder = 'Select a text object (type to filter)';
-    quickPick.matchOnDescription = true;
+    const quickPick = vscode.window.createQuickPick<(typeof allItems)[0]>();
+    quickPick.items = allItems;
+    quickPick.placeholder = 'Select a text object (type to filter, case-sensitive for uppercase)';
+
+    // カスタムフィルタリング:
+    // 1. まず shortcut に対して case-sensitive でマッチ
+    // 2. ヒットしなければ label + description に対して case-insensitive fuzzy マッチ
+    quickPick.onDidChangeValue((value) => {
+        if (!value) {
+            quickPick.items = allItems;
+            return;
+        }
+
+        // Phase 1: shortcut (description) に対して case-sensitive prefix/exact マッチ
+        const shortcutMatches = allItems.filter((item) => {
+            // description は "iw" や "i( ib" のような形式
+            const shortcuts = item.description.split(' ');
+            return shortcuts.some((s) => s.startsWith(value));
+        });
+
+        if (shortcutMatches.length > 0) {
+            quickPick.items = shortcutMatches;
+            return;
+        }
+
+        // Phase 2: case-insensitive fuzzy マッチ (label + description)
+        const fuzzyMatches = allItems.filter((item) => {
+            const target = `${item.label} ${item.description}`.toLowerCase();
+            return target.includes(value.toLowerCase());
+        });
+        quickPick.items = fuzzyMatches;
+    });
 
     return new Promise((resolve) => {
         quickPick.onDidAccept(async () => {
