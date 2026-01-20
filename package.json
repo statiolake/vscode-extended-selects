@@ -146,6 +146,8 @@
         "watch": "tsc -watch -p ./",
         "lint": "eslint src --ext ts && biome check .",
         "format": "eslint src --ext ts --fix && biome check --write",
+        "package": "vsce package",
+        "publish": "vsce publish",
         "pretest": "npm run compile && npm run lint",
         "test": "vscode-test"
     },
