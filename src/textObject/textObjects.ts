@@ -5,6 +5,7 @@ import {
     findCurrentArgument,
     findDocumentEnd,
     findDocumentStart,
+    findIndentBlock,
     findInnerParagraph,
     findInnerWordAtBoundary,
     findInsideBalancedPairs,
@@ -174,6 +175,20 @@ export const textObjectDefinitions: TextObjectDefinition[] = [
             const end = findDocumentEnd(document);
             return new Range(start, end);
         },
+    },
+
+    // Indent text objects
+    {
+        id: 'inner-indent',
+        label: 'inner indent i',
+        shortcut: 'ii',
+        compute: (document, position) => findIndentBlock(document, position),
+    },
+    {
+        id: 'around-indent',
+        label: 'around indent i',
+        shortcut: 'ai',
+        compute: (document, position) => findIndentBlock(document, position),
     },
 ];
 

@@ -129,6 +129,14 @@
             {
                 "command": "extended-selects.select.around-entire",
                 "title": "Extended Selects: Select Around Entire Document"
+            },
+            {
+                "command": "extended-selects.select.inner-indent",
+                "title": "Extended Selects: Select Inner Indent"
+            },
+            {
+                "command": "extended-selects.select.around-indent",
+                "title": "Extended Selects: Select Around Indent"
             }
         ]
     },

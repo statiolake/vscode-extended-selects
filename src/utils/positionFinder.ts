@@ -614,3 +614,91 @@ export class OffsetRange {
         return new Range(document.positionAt(this.startOffset), document.positionAt(this.endOffset));
     }
 }
+
+/**
+ * 行のインデントレベル（先頭の空白文字数）を取得
+ */
+function getIndentLevel(document: TextDocument, lineNumber: number): number {
+    const line = document.lineAt(lineNumber);
+    const text = line.text;
+    let indent = 0;
+    for (const char of text) {
+        if (char === ' ') {
+            indent++;
+        } else if (char === '\t') {
+            indent += 4; // タブは4スペースとして扱う
+        } else {
+            break;
+        }
+    }
+    return indent;
+}
+
+/**
+ * 行が空行かどうかを判定
+ */
+function isBlankLine(document: TextDocument, lineNumber: number): boolean {
+    return document.lineAt(lineNumber).text.trim() === '';
+}
+
+/**
+ * 同じインデントレベルのブロックを探す
+ * カーソル位置の行のインデントレベル以上の連続した行を選択
+ */
+export function findIndentBlock(document: TextDocument, position: Position): Range {
+    if (document.lineCount === 0) {
+        return new Range(position, position);
+    }
+
+    const currentLine = position.line;
+
+    // 空行の場合はその行だけを返す
+    if (isBlankLine(document, currentLine)) {
+        if (currentLine < document.lineCount - 1) {
+            return new Range(new Position(currentLine, 0), new Position(currentLine + 1, 0));
+        } else {
+            return new Range(new Position(currentLine, 0), document.lineAt(currentLine).range.end);
+        }
+    }
+
+    const baseIndent = getIndentLevel(document, currentLine);
+
+    // 上方向に探索
+    let startLine = currentLine;
+    while (startLine > 0) {
+        const prevLine = startLine - 1;
+        if (isBlankLine(document, prevLine)) {
+            break;
+        }
+        const indent = getIndentLevel(document, prevLine);
+        if (indent < baseIndent) {
+            break;
+        }
+        startLine = prevLine;
+    }
+
+    // 下方向に探索
+    let endLine = currentLine;
+    while (endLine < document.lineCount - 1) {
+        const nextLine = endLine + 1;
+        if (isBlankLine(document, nextLine)) {
+            break;
+        }
+        const indent = getIndentLevel(document, nextLine);
+        if (indent < baseIndent) {
+            break;
+        }
+        endLine = nextLine;
+    }
+
+    // 範囲を構築
+    const start = new Position(startLine, 0);
+    let end: Position;
+    if (endLine < document.lineCount - 1) {
+        end = new Position(endLine + 1, 0);
+    } else {
+        end = document.lineAt(endLine).range.end;
+    }
+
+    return new Range(start, end);
+}

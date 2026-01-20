@@ -29,7 +29,9 @@ export type TextObjectId =
     | 'inner-argument'
     | 'around-argument'
     | 'inner-entire'
-    | 'around-entire';
+    | 'around-entire'
+    | 'inner-indent'
+    | 'around-indent';
 
 /**
  * テキストオブジェクトの定義
