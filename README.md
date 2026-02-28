@@ -1,3 +1,13 @@
+# ⚠️ DEPRECATED
+
+**This extension has been renamed to [Extended Move](https://github.com/statiolake/vscode-extended-move).**
+
+Please install the new extension instead:
+- [Marketplace](https://marketplace.visualstudio.com/items?itemName=statiolake.vscode-extended-move)
+- [GitHub](https://github.com/statiolake/vscode-extended-move)
+
+---
+
 # Extended Selects
 
 Vim-style text object selection for VS Code.
