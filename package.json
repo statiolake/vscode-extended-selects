@@ -2,7 +2,7 @@
     "name": "extended-selects",
     "displayName": "[DEPRECATED] Extended Selects",
     "description": "[DEPRECATED] This extension has been renamed to 'Extended Move'. Please install 'vscode-extended-move' instead. See https://github.com/statiolake/vscode-extended-move for the new version.",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "license": "MIT",
     "publisher": "statiolake",
     "repository": {
